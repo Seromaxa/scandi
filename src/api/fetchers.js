@@ -1,25 +1,8 @@
-import {ApolloClient,InMemoryCache,HttpLink,from} from '@apollo/client'
-import {onError} from '@apollo/client/link/error'
+import {ApolloClient,InMemoryCache,from} from '@apollo/client'
+import { errorLink } from './errorsHendler'
+import { httpLink } from './link'
 import {CATEGORIES} from './quiries'
 
-
-///Preper
-
-const httpLink = new HttpLink({
-    uri:'http://localhost:4000'
-})
-
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors)
-      graphQLErrors.forEach(({ message, locations, path }) =>
-        console.log(
-          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-        ),
-        
-      );
-  
-    if (networkError) console.log(`[Network error]: ${networkError}`);   
-  });
 
 const client = new ApolloClient({
     cache:new InMemoryCache(),
