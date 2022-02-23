@@ -24,6 +24,7 @@ const Category = createSlice({
             } 
         })
         builder.addCase(getCategories.fulfilled,(state,action)=>{
+            console.log(action.payload)
             return {
                 ...state,
                 categories:[...state.categories,...action.payload.data.categories],
